@@ -1,0 +1,12 @@
+{
+  "name": "kitra-serino",
+  "version": "1.0.0",
+  "description": "A mini-project treasure game that uses Node.js, Express, Joi (Validation), Jest and SuperTest (Testing) and JavaScript as the primary language.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Antonio Aradaza",
+  "license": "ISC"
+}

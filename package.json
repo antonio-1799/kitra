@@ -2,7 +2,7 @@
   "name": "kitra-serino",
   "version": "1.0.0",
   "description": "A mini-project treasure game that uses Node.js, Express, Joi (Validation), Jest and SuperTest (Testing) and JavaScript as the primary language.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "db:generate": "npx sequelize-cli migration:create --name",
     "db:generate:seed": "npx sequelize-cli seed:generate --name",
@@ -10,7 +10,7 @@
     "db:seed": "npx sequelize-cli db:seed:all",
     "db:rollback": "npx sequelize-cli db:migrate:undo:all",
     "db:rollback:seed": "npx sequelize-cli db:seed:undo:all",
-    "serve": "node index.js"
+    "serve": "node src/index.js"
   },
   "keywords": [],
   "author": "Antonio Aradaza",

@@ -9,6 +9,7 @@
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:seed": "npx sequelize-cli db:seed:all",
     "db:rollback": "npx sequelize-cli db:migrate:undo:all",
+    "db:rollback:seed": "npx sequelize-cli db:seed:undo:all",
     "serve": "node index.js"
   },
   "keywords": [],

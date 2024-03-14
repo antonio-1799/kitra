@@ -14,5 +14,6 @@ module.exports = {
     host: process.env.DB_URL,
     dialect: process.env.DB_DIALECT,
     seederStorage: 'sequelize',
+    seederStorageTableName: 'sequelizedata',
   },
 };

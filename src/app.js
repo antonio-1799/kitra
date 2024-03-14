@@ -1,5 +1,6 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
+const express = require('express');
+const dotenv = require('dotenv');
+const baseRouter = require('./routes/base.router');
 
 dotenv.config();
 
@@ -7,10 +8,6 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(baseRouter);
 
-// Health check API
-app.get('/health', (req, res) => {
-  res.send('This API is healthy!');
-});
-
-export default app;
+module.exports = app;

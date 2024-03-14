@@ -15,11 +15,11 @@ module.exports = (sequelize) => {
         autoIncrement: false,
       },
       latitude: {
-        type: DataTypes.FLOAT(11, 8),
+        type: DataTypes.DECIMAL(10, 8),
         allowNull: false,
       },
       longitude: {
-        type: DataTypes.FLOAT(11, 8),
+        type: DataTypes.DECIMAL(11, 8),
         allowNull: false,
       },
       name: {

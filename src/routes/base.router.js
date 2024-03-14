@@ -1,12 +1,10 @@
 const express = require('express');
-const treasuresRouter = require('./geolocation.router');
-// import { Router } from 'express';
-// import treasuresRouter from './geolocation.router.js';
+const geolocationRouter = require('./geolocation.router');
 
 const baseRouter = express.Router();
 
 // Add routers here
-baseRouter.use('/geolocation', treasuresRouter);
+baseRouter.use('/geolocation', geolocationRouter);
 
 // export default baseRouter;
 module.exports = baseRouter;

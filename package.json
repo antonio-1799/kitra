@@ -10,7 +10,8 @@
     "db:seed": "npx sequelize-cli db:seed:all",
     "db:rollback": "npx sequelize-cli db:migrate:undo:all",
     "db:rollback:seed": "npx sequelize-cli db:seed:undo:all",
-    "serve": "node src/index.js"
+    "serve": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "Antonio Aradaza",

@@ -6,14 +6,21 @@ class MoneyValuesRepository {
     this.moneyValuesModel = MoneyValues;
   }
 
-  async findTreasuresByTreasureIds({ treasureIds }) {
+  async findTreasuresByTreasureIds({ treasureIds, minimumTreasureAmount }) {
+    const query = {
+      treasureId: {
+        [Op.in]: treasureIds,
+      },
+      amt: {
+        [Op.gt]: minimumTreasureAmount,
+      },
+    };
+
+    if (!minimumTreasureAmount) delete query.amt;
+
     return this.moneyValuesModel.findAll({
       attributes: ['treasureId', 'amt'],
-      where: {
-        treasureId: {
-          [Op.in]: treasureIds,
-        },
-      },
+      where: query,
     });
   }
 }

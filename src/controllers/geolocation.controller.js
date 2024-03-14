@@ -9,12 +9,13 @@ class GeolocationController {
 
   async findAllTreasures(req, res) {
     try {
-      const { latitude, longitude, distance } = req.body;
+      const { latitude, longitude, distance, prizeValue } = req.body;
 
       const treasures = await this.geolocationService.findAllTreasures({
         latitude,
         longitude,
         distance,
+        prizeValue,
       });
 
       const message =

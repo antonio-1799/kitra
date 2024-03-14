@@ -16,7 +16,7 @@ class GeolocationService {
     );
   }
 
-  async findAllTreasures({ latitude, longitude, distance }) {
+  async findAllTreasures({ latitude, longitude, distance, prizeValue }) {
     const treasureCoordinates = await this.treasureRepository.findAll();
     const minimumDistance = distance * 1000; // Distance given converted to meters
     const closestTreasures = [];
@@ -49,25 +49,32 @@ class GeolocationService {
       (closestTreasure) => closestTreasure.id,
     );
 
-    // Get the number of treasures based on its id
+    // Get the number of treasures based on its id and optional prize value
+    // Optional filter if prize value is given
+    const minimumTreasureAmount = prizeValue ?? null;
     const treasures =
       await this.moneyValuesRepository.findTreasuresByTreasureIds({
         treasureIds,
+        minimumTreasureAmount,
       });
 
     /**
      * If there are multiple treasures inside the array
      * e.g. [{treasureId: 100, amt: 10}, {treasureId: 100, amt: 15}]
-     * Remove the duplicate randomly
+     * Remove the duplicate randomly,
+     * otherwise retain the minimum amount if prizeValue !== null
      */
-    const updatedTreasures = removeDuplicatesRandomly(treasures);
+    const updatedTreasures = removeDuplicatesRandomly({
+      array: treasures,
+      isPrizeValue: prizeValue !== null,
+    });
 
     const totalTreasures = updatedTreasures.map(
       (treasuresWithAmount) => treasuresWithAmount.amt,
     );
 
     return {
-      treasuresFound: closestTreasures,
+      treasuresFound: updatedTreasures,
       totalTreasureAmount: this.#sumOfAllMoney({ arr: totalTreasures }),
     };
   }

@@ -1,23 +1,19 @@
-const removeDuplicatesRandomly = (array) => {
-  const uniqueMap = new Map();
+const removeDuplicatesRandomly = ({ array, isPrizeValue }) => {
+  const treasureMap = {};
 
-  // Group objects by their "treasureId"
-  array.forEach((obj, index) => {
-    const key = obj.treasureId;
-    if (!uniqueMap.has(key)) {
-      uniqueMap.set(key, []);
+  array.forEach((obj) => {
+    const { treasureId, amt } = obj;
+
+    if (
+      !(treasureId in treasureMap) ||
+      (isPrizeValue && amt < treasureMap[treasureId]) ||
+      (!isPrizeValue && Math.random() < 0.5)
+    ) {
+      treasureMap[treasureId] = amt;
     }
-    uniqueMap.get(key).push(index);
   });
 
-  const uniqueObjects = [];
-  uniqueMap.forEach((indexes) => {
-    // Randomly select an index from each group of duplicates
-    const randomIndex = indexes[Math.floor(Math.random() * indexes.length)];
-    uniqueObjects.push(array[randomIndex]);
-  });
-
-  return uniqueObjects;
+  return array.filter((obj) => obj.amt === treasureMap[obj.treasureId]);
 };
 
 module.exports = removeDuplicatesRandomly;

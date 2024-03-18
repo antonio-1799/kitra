@@ -13,6 +13,14 @@ class UsersRepository {
       },
     });
   }
+
+  async findOne({ id }) {
+    return this.usersModel.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 module.exports = UsersRepository;

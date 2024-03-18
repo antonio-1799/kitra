@@ -1,6 +1,9 @@
+const httpStatus = require('http-status');
+const jwt = require('jsonwebtoken');
+
 const UsersRepository = require('../repositories/users.repository');
 const ApiResponse = require('../utils/ApiResponse');
-const httpStatus = require('http-status');
+const { SECRET_KEY, TOKEN_EXPIRY } = require('../common/constants');
 
 class UsersService {
   constructor() {
@@ -21,10 +24,24 @@ class UsersService {
         statusCode: httpStatus.NOT_FOUND,
       });
 
+    // Generate token
+    const token = jwt.sign(
+      {
+        id: user.id,
+        name: user.name,
+      },
+      SECRET_KEY,
+      {
+        expiresIn: TOKEN_EXPIRY,
+      },
+    );
+
     return this.response.success({
       res,
       message: 'Login successfully',
-      data: user,
+      data: {
+        access_token: token,
+      },
     });
   }
 }
